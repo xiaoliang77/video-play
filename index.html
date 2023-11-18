@@ -35,11 +35,16 @@
     <script src="./hls.js"></script>
     <script src="./DPlayer.min.js"></script>
     <script>
-        var video_url = getQueryString("url")
-        var name = getQueryString("name")
-        if (name && !name == null) {
-            document.title = name
+        const video_url = getQueryString("url")
+        const name = getQueryString("name")
+        console.log(name);
+        if (name) {
+            // if (name == null) {
+            //     document.title = "iPhone8、小良 - Play"
+            // }
+            document.title = name       
         }
+
 
         // 创建 DPlayer 对象
         const dp = new DPlayer({

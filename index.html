@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone8、小良 - Play</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #dplayer {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="dplayer"></div>
+    </div>
+    <script src="./hls.js"></script>
+    <script src="./DPlayer.min.js"></script>
+    <script>
+        var video_url = getQueryString("url")
+        var name = getQueryString("name")
+        if (name && !name == null) {
+            document.title = name
+        }
+
+        // 创建 DPlayer 对象
+        const dp = new DPlayer({
+            container: document.getElementById('dplayer'),
+            video: {
+                url: video_url,
+            },
+            airplay: true,
+        });
+        // 播放事件
+        dp.on('play', function () {
+            var timer = setTimeout('setclass()', 3000);  // 播放后3秒后设置模糊遮罩层
+            if (isios()) {
+                dp.fullScreen.request("browser")
+            } else {
+                dp.fullScreen.request("web")
+            }
+        });
+
+        // 判断是否是ios
+        function isios() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["iPhone", "iPad", "iPod"];
+            var flag = false;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = true;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        // 隐藏菜单栏和播放按钮
+        function setclass() {
+            let classAtr = document.getElementById("dplayer").getAttribute("class");
+            let newClass = classAtr.concat("  dplayer-hide-controller");
+            document.getElementById("dplayer").setAttribute("class", newClass);
+        }
+
+        // 获取url中的参数
+        function getQueryString(name) {
+            const url_string = window.location.href
+            const url = new URL(url_string);
+            return url.searchParams.get(name);
+        }
+
+    </script>
+</body>
+
+</html>

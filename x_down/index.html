@@ -9,7 +9,8 @@
     <link rel="preload" href="./files/84c54ffc9f524a18dacc.css" as="style">
     <link rel="stylesheet" href="./files/84c54ffc9f524a18dacc.css">
     <style>
-        #__NEXT_DATA__ ,.submit-btn{
+        #__NEXT_DATA__,
+        .submit-btn {
             display: none;
         }
     </style>
@@ -31,8 +32,11 @@
         let key = window.location.href.split('?key=')[1]
         let decoded = atob(key);
         document.getElementById('__NEXT_DATA__').innerHTML = decoded;
-        document.addEventListener("DOMContentLoaded", function(){
-            document.getElementsByClassName("submit-btn")[0].click();
+        document.addEventListener("DOMContentLoaded", function () {
+            setTimeout(function () {
+                document.getElementsByClassName("submit-btn")[0].click();
+            }, 1000);
+            
         });
     </script>
 

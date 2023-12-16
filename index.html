@@ -29,15 +29,16 @@
                 url: video_url,
             },
             airplay: true,
+            preload:'auto',
         });
         // 播放事件
         dp.on('play', function () {
             var timer = setTimeout('setclass()', 3000);  // 播放后3秒后设置模糊遮罩层
-            if (isios()) {
-                dp.fullScreen.request("browser")
-            } else {
-                dp.fullScreen.request("web")
-            }
+            // if (isios()) {
+            //     dp.fullScreen.request("browser")
+            // } else {
+            //     dp.fullScreen.request("web")
+            // }
         });
 
         // 判断是否是ios
@@ -67,6 +68,10 @@
             const url = new URL(url_string);
             return url.searchParams.get(name);
         }
+
+        // 改变播放按钮背景颜色
+        let playbat = document.getElementsByClassName('dplayer-mobile-play')[0]
+        playbat.style.cssText="border-radius:40px;background-color:#676262b9;"
 
     </script>
 </body>

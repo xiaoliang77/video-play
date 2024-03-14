@@ -15,6 +15,7 @@
     <script src="./js/hls.js"></script>
     <script src="./js/DPlayer.min.js"></script>
     <script>
+        
         const video_url = getQueryString("url")
         const name = getQueryString("name")
         if (name) {
@@ -26,7 +27,7 @@
         const dp = new DPlayer({
             container: document.getElementById('dplayer'),
             video: {
-                url: video_url,
+                url: encodeURI(video_url),
             },
             airplay: true,
             preload:'auto',

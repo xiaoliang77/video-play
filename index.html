@@ -16,7 +16,7 @@
     <script src="./js/DPlayer.min.js"></script>
     <script>
         
-        const video_url = getQueryString("url")
+        const video_url = encodeURI(getQueryString("url"))
         const name = getQueryString("name")
         if (name) {
             document.title = name
@@ -27,7 +27,7 @@
         const dp = new DPlayer({
             container: document.getElementById('dplayer'),
             video: {
-                url: encodeURI(video_url),
+                url: video_url,
             },
             airplay: true,
             preload:'auto',
